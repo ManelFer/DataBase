@@ -1,20 +1,18 @@
-from InquirerPy import inquirer
-from InquirerPy.validator import EmptyInputValidator
-
+from InquirerPy import prompt
 
 def main() -> None:
-    integer_val = inquirer.number(
-        message="Enter integer:",
-        min_allowed=-2,
-        max_allowed=10,
-        validate=EmptyInputValidator(),
-    ).execute()
-    float_val = inquirer.number(
-        message="Enter float:",
-        float_allowed=True,
-        validate=EmptyInputValidator(),
-    ).execute()
+    perguntas = [
+    {
+        "type": "list",
+        "message" : "=======Qual seu conhecimento?=======",
+        "choices" : ["Iniciante", "intermediario", "profissional"],
+        
+    },
+    {"type": "confirm", "message": "confirm?"},
+]
 
+    resultado = prompt(perguntas)
+    name = resultado[""]
 
 if __name__ == "__main__":
     main()
