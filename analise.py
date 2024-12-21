@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt  # Corrigido para importar pyplot
 import plotly.express as px
+import plotly.graph_objects as go
 
 # Carregar os dados
 dados = pd.read_csv('https://gist.githubusercontent.com/adolfoguimaraes/7202a4b356d485ded9e5ce9df953c936/raw/f01e392bdc9af84a501f895abfb36092505f7231/anatel_bandalarga_capitais.csv')
@@ -25,7 +27,7 @@ if not filtro_dados.empty:
 
 
     #criar grafico
-    grafico = px.bar(filtro_dados, x='ano', y='sigla_uf', color='nome_uf', title=f'Analise de dados de {nome_municipio}')
+    grafico = px.area(filtro_dados, x='ano', y='sigla_uf', color='nome_uf', title=f'Analise de dados de {nome_municipio}')
     grafico.write_html('analise.html')
     grafico.show()
 else:
