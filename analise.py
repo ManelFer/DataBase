@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt  # Corrigido para importar pyplot
 import plotly.express as px
 
@@ -22,10 +21,12 @@ filtro_dados = dados[(dados['nome_uf'] == nome_uf) & (dados['nome_municipio'] ==
 
 # Exibir o resultado
 if not filtro_dados.empty:
+    
+
+
     #criar grafico
-    grafico = px.scatter(filtro_dados, x='ano', y='sigla_uf', color='nome_uf', title=f'Analise de dados de {nome_municipio}')
+    grafico = px.bar(filtro_dados, x='ano', y='sigla_uf', color='nome_uf', title=f'Analise de dados de {nome_municipio}')
     grafico.write_html('analise.html')
-    grafico.write_image('analise.png')
     grafico.show()
 else:
     print("Nenhum dado encontrado para a combinação escolhida.")
