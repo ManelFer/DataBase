@@ -72,5 +72,24 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.savefig('acesso_por_ano.png')
     plt.close()
 
+    # maiores números
+    acessos_por_empresa_porte = estado_data.groupby(['nome_empresa', 'porte_empresa']).size().reset_index(name='total_acessos')
+    maiores_contratos = acessos_por_empresa_porte.sort_values(by='total_acessos', ascending=False)
+    as_10_maiores_empresas = maiores_contratos.head(10)  # Exibe as 10 empresas com maior número de contratos
+        # criando a tabela
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.axis('tight')
+    ax.axis('off')
+    tabela_data = as_10_maiores_empresas.values.tolist()
+    columns = as_10_maiores_empresas.columns.tolist()
+    table = ax.table(cellText=tabela_data, colLabels=columns, cellLoc='center', loc='center')
+    table.auto_set_font_size(False) 
+    table.set_fontsize(10)
+    table.scale(1.2, 1.2) # tamanho da tabela
+    plt.title('As 10 maiores empresas', fontsize=14)
+    plt.savefig('As_10_maiores.png', bbox_inches='tight')
+    plt.close()
+
+
 # Analisar o estado escolhido
 analisar_estado(estado_escolhido, ano_inicial, ano_final)
