@@ -51,5 +51,26 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.savefig('grafico_pizza.png')  # Salva o gráfico como imagem
     plt.close()  # Fecha a figura
 
+    # Gráfico de barra
+    acessos_por_tecnologia = estado_data['tecnologia'].value_counts()
+    plt.figure(figsize=(10, 6))
+    acessos_por_tecnologia.plot(kind='bar')
+    plt.title('distribuição de por tecnologia')
+    plt.xlabel('Tecnologia')
+    plt.ylabel('Número de acesso')
+    plt.xticks(rotation=45)
+    plt.savefig('acesso_por_tecnologia.png')
+    plt.close()
+
+    # Contanto acesso por ano
+    acessos_por_ano = estado_data.groupby('ano')['nome_empresa'].count()
+    plt.figure(figsize=(10, 6))
+    acessos_por_ano.plot(kind='line')
+    plt.title('Número de acesso por ano')
+    plt.xlabel('ano')
+    plt.ylabel('Número de acesso')
+    plt.savefig('acesso_por_ano.png')
+    plt.close()
+
 # Analisar o estado escolhido
 analisar_estado(estado_escolhido, ano_inicial, ano_final)
