@@ -90,6 +90,16 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.savefig('As_10_maiores.png', bbox_inches='tight')
     plt.close()
 
+    # Contando acessos por ano e porte
+    acessos_por_ano_porte = estado_data.groupby(['ano', 'porte_empresa']).size().unstack()
+    acessos_por_ano_porte.plot(kind='bar', stacked=True, figsize=(10, 6))
+    plt.title('Mudança no Perfil das Empresas ao Longo dos Anos')
+    plt.xlabel('Ano')
+    plt.ylabel('Número de Acessos')
+    plt.legend(title='Porte da Empresa')
+    plt.savefig('perfil_empresas_ano.png')
+    plt.close()
+
 
 # Analisar o estado escolhido
 analisar_estado(estado_escolhido, ano_inicial, ano_final)
