@@ -100,20 +100,26 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.savefig('perfil_empresas_ano.png')
     plt.close()
 
-    # filtrar dados mais recentes
+    # dados  recentes
     ano_recente = estado_data['ano'].max()
     dados_recente = estado_data[estado_data['ano'] == ano_recente]
-
-    # contagem de acesso
-    acessos_recentes = dados_recente['nome_empresa'].value_counts()
-    plt.figure(figsize=(10, 6))
-    acessos_recentes.plot(kind='bar')
-    plt.title(f'Distribuição das empresas em {ano_recente}')
-    plt.xlabel('Empresa')
-    plt.ylabel('Acessos')
-    plt.xticks(rotation=45)
-    plt.savefig('distribuição.png')
-    plt.close()
+    # Contagem de acessos
+    acessos_recentes = dados_recente['nome_empresa'].value_counts().reset_index()
+    acessos_recentes.columns = ['nome_empresa', 'total_acessos']  # Colunas 
+    # iniciar tabela
+    fig, ax = plt.subplots(figsize=(10, 4))  # Tamanho
+    ax.axis('tight')
+    ax.axis('off')
+    table_data = acessos_recentes.values.tolist()  # Convertendo os dados para lista
+    columns = acessos_recentes.columns.tolist()  # Obtendo os nomes das colunas
+    table = ax.table(cellText=table_data, colLabels=columns, cellLoc='center', loc='center')
+    # Estilizando a tabela
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1.2, 1.2)  # Ajustando o tamanho da tabela
+    plt.title(f'Distribuição das Empresas em {ano_recente}', fontsize=14)
+    plt.savefig('distribuicao_empresas_tabela.png', bbox_inches='tight')  
+    plt.close()  
 
 
 # Analisar o estado escolhido
