@@ -100,6 +100,21 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.savefig('perfil_empresas_ano.png')
     plt.close()
 
+    # filtrar dados mais recentes
+    ano_recente = estado_data['ano'].max()
+    dados_recente = estado_data[estado_data['ano'] == ano_recente]
+
+    # contagem de acesso
+    acessos_recentes = dados_recente['nome_empresa'].value_counts()
+    plt.figure(figsize=(10, 6))
+    acessos_recentes.plot(kind='bar')
+    plt.title(f'Distribuição das empresas em {ano_recente}')
+    plt.xlabel('Empresa')
+    plt.ylabel('Acessos')
+    plt.xticks(rotation=45)
+    plt.savefig('distribuição.png')
+    plt.close()
+
 
 # Analisar o estado escolhido
 analisar_estado(estado_escolhido, ano_inicial, ano_final)
