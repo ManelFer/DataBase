@@ -120,6 +120,7 @@ def analisar_estado(estado, ano_inicial, ano_final):
     plt.title(f'Distribuição das Empresas em {ano_recente}', fontsize=14)
     plt.savefig('distribuicao_empresas_tabela.png', bbox_inches='tight')  
     plt.close()  
+    print(ano_recente)
 
 
 # Analisar o estado escolhido
